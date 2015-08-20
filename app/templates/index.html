@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{{name}}
+<form class="ym-form" method="POST">
+    {{ form.hidden_tag()}}
+    <div class="ym-fbox ym-error">
+        {% for field, errors in form.errors.items() %}
+
+        <div class="ym-message">
+            {{ form[field].label(class="ym-inline") }}: {{ ', '.join(errors) }}
+        </div>
+        {% endfor %}
+
+
+    </div>
+    <div class="ym-fbox">
+        {{ form.query.label(class_="ym-inline") }} {{ form.query(class_="ym-inline") }}
+        <input type="submit" class="ym-inline ym-button" value="submit" id="submit"/>
+    </div>
+
+    {% if data %}
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </thead>
+        {% for row in data %}
+            <tr>
+                <td>{{row}}</td>
+                <td><a href="{{ url_for('view', name=row) }}" class="ym-button">View</a></td>
+            </tr>
+
+        {% endfor %}
+        </table>
+    {% endif %}
+</form>
+{% endblock %}

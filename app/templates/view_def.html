@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<link rel="stylesheet" href="{{url_for('static', filename='prism/prism.css')}}">
+{% endblock %}
+
+{% block content %}
+<pre>
+    <code class="language-sql">
+        {{name}}
+    </code>
+</pre>
+{% endblock %}
+
+{% block js %}
+<script src="{{url_for('static', filename='prism/prism.js')}}"></script>
+{% endblock %}

@@ -1,7 +1,7 @@
 __author__ = 'LMai'
 from flask import render_template, g, request, redirect, url_for, session
-from app.searchdb import searchdb
-from app.searchdb.forms import SearchForm
+from . import searchdb
+from .forms import SearchForm
 from app import utils
 
 
@@ -16,10 +16,12 @@ def view(name):
 def index():
     form = SearchForm()
 
+    # get all databases
     if request.method == 'POST':
         if form.validate():
-            print(form.query.data)
-            #data = utils.find_me(g.db, form.query.data)
-            #session['data'] = data
+            data = utils.find_me(g.db, form.query.data)
+            for row in data:
+                print(row)
+            session['data'] = data
             return redirect(url_for('searchdb.index'))
-    return render_template('index.html', form=form, data=None)
+    return render_template('index.html', form=form, data=session.get('data'))

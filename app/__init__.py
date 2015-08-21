@@ -6,7 +6,7 @@ def create_app(config_file):
     app = Flask(__name__)
     app.config.from_pyfile(config_file)
 
-    from app.searchdb import searchdb
+    from .searchdb import searchdb
     app.register_blueprint(searchdb)
 
     return app

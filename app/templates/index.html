@@ -11,14 +11,21 @@
             {{ form[field].label(class="ym-inline") }}: {{ ', '.join(errors) }}
         </div>
         {% endfor %}
-
+    </div>
+    <div class="ym-fbox">
+        {{ form.server.label(class_="ym-inline") }}
+        {{ form.server(class_="ym-inline") }}
+        {{ form.databases.label(class_="ym-inline") }}
+        {{ form.databases(class_="ym-inline", size=40) }}
 
     </div>
     <div class="ym-fbox">
         {{ form.query.label(class_="ym-inline") }} {{ form.query(class_="ym-inline") }}
+        {{ form.containing_text(class_="ym-inline") }} {{ form.containing_text.label(class_="ym-inline") }}
         <input type="submit" class="ym-inline ym-button" value="submit" id="submit"/>
     </div>
 
+</form>
     {% if data %}
         <table>
             <thead>
@@ -32,11 +39,11 @@
             <tr>
                 <td>{{row[0]}}</td>
                 <td>{{row[1]}}</td>
-                <td><a href="{{ url_for('searchdb.view', name=row[1]) }}" class="ym-button">View</a></td>
+                <td><a href="{{ url_for('searchdb.view', schema=row[0], name=row[1]) }}" class="ym-button">View</a></td>
             </tr>
-
         {% endfor %}
+
         </table>
     {% endif %}
-</form>
+
 {% endblock %}

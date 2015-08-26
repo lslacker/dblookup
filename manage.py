@@ -10,12 +10,14 @@ app = create_app(config_file)
 
 @app.before_request
 def before_request():
-    g.db = DB.from_connection_string(app.config['CONNECTION_STRING'])
+    pass
+    #g.db = DB.from_connection_string(app.config['CONNECTION_STRING'])
 
 
 @app.teardown_request
 def teardown_request(exception):
     db = getattr(g, 'db', None)
+    print('del db')
     if db is not None:
         del db
 
